@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ND Gameing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="margin:0; font-family:sans-serif; color:white;">
+
+<!-- 🌌 BACKGROUND -->
+<div style="
+position:fixed;
+width:100%;
+height:100%;
+background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
+url('https://images.unsplash.com/photo-1542751371-adc38448a05e');
+background-size:cover;
+background-position:center;
+z-index:-1;">
+</div>
+
+<!-- 🎬 LANDING PAGE -->
+<div id="landing" style="text-align:center; padding-top:100px;">
+
+<img src="logo.png" style="
+width:160px;
+border-radius:20px;
+box-shadow:0 0 30px #00ffcc;
+">
+
+<h1 style="font-size:42px;">ND Gameing</h1>
+<p>Play • Win • Earn 💰</p>
+
+<input id="username" placeholder="Enter Username" style="
+padding:12px;
+border:none;
+border-radius:10px;
+"><br><br>
+
+<input id="password" type="password" placeholder="Enter Password" style="
+padding:12px;
+border:none;
+border-radius:10px;
+"><br><br>
+
+<button onclick="login()" style="
+padding:15px 30px;
+font-size:18px;
+border:none;
+border-radius:30px;
+background:#00ffcc;
+color:black;
+box-shadow:0 0 20px #00ffcc;">
+Login 🚀
+</button>
+
+</div>
+
+<!-- 🎮 GAMING DASHBOARD -->
+<div id="app" style="display:none; padding:20px; text-align:center;">
+
+<h2>💰 Balance: ₹<span id="balance">100</span></h2>
+
+<input id="amount" placeholder="Enter amount" style="
+padding:10px;
+border-radius:10px;
+border:none;
+"><br><br>
+
+<button onclick="deposit()">Deposit</button>
+<button onclick="withdraw()">Withdraw</button>
+
+<h2>🎮 Games</h2>
+
+<button onclick="spin()">🎡 Spin</button><br><br>
+<button onclick="cricket()">🏏 Cricket</button><br><br>
+<button onclick="rocket()">🚀 Rocket</button>
+
+<p id="result"></p>
+
+</div>
+
+<script>
+let balance = localStorage.getItem("balance") || 100;
+document.getElementById("balance").innerText = balance;
+
+// 🔐 LOGIN SYSTEM
+function login(){
+let user = document.getElementById("username").value;
+let pass = document.getElementById("password").value;
+
+if(user !== "" && pass !== ""){
+document.getElementById("landing").style.display="none";
+document.getElementById("app").style.display="block";
+}else{
+alert("Enter details");
+}
+}
+
+// 💰 WALLET
+function deposit(){
+let amt = parseInt(document.getElementById("amount").value);
+balance = parseInt(balance) + amt;
+update();
+}
+
+function withdraw(){
+let amt = parseInt(document.getElementById("amount").value);
+if(balance >= amt){
+balance -= amt;
+update();
+}else{
+alert("Low balance");
+}
+}
+
+// 🎮 GAMES
+function spin(){
+let win = Math.floor(Math.random()*50);
+balance += win;
+document.getElementById("result").innerText="🎡 You won ₹"+win;
+update();
+}
+
+function cricket(){
+let score = Math.floor(Math.random()*100);
+if(score > 50){
+balance += 20;
+document.getElementById("result").innerText="🏏 Win Score "+score;
+}else{
+balance -= 10;
+document.getElementById("result").innerText="🏏 Lose Score "+score;
+}
+update();
+}
+
+function rocket(){
+let multi = (Math.random()*5).toFixed(2);
+let win = Math.floor(multi*10);
+balance += win;
+document.getElementById("result").innerText="🚀 x"+multi+" = ₹"+win;
+update();
+}
+
+// 🔄 UPDATE
+function update(){
+document.getElementById("balance").innerText = balance;
+localStorage.setItem("balance", balance);
+}
+</script>
+
+</body>
+</html>
