@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ND Gameing</title><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"><style>
+:root{
+  --bg:#05070a;
+  --card:#0b0f14;
+  --accent:#00ffc3;
+  --accent2:#7a5cff;
+  --text:#e6f1ff;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Orbitron',sans-serif;background:radial-gradient(1200px 600px at 80% -10%, #132032, transparent), var(--bg);color:var(--text)}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:rgba(10,14,20,.7);backdrop-filter:blur(10px);position:sticky;top:0;border-bottom:1px solid rgba(255,255,255,.06)}
+header h1{color:var(--accent);letter-spacing:2px}
+nav a{color:#cfe3ff;margin:0 10px;text-decoration:none;font-size:13px;opacity:.85}
+nav a:hover{color:white}
+
+.hero{height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(180deg, rgba(0,0,0,.6), rgba(0,0,0,.95)), url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1600&auto=format&fit=crop');background-size:cover;background-position:center}
+.hero h2{font-size:48px;margin:0;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;color:transparent}
+.hero p{opacity:.8}
+
+.btn{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:#001;padding:10px 22px;margin-top:12px;border-radius:30px;cursor:pointer;transition:.3s}
+.btn:hover{transform:scale(1.08);box-shadow:0 0 15px var(--accent)}
+
+section{padding:70px 20px;text-align:center}
+h2{margin-bottom:25px}
+
+.grid{display:flex;flex-wrap:wrap;justify-content:center;gap:18px}
+.card{background:linear-gradient(145deg,#0b0f14,#0a0d12);padding:22px;border-radius:16px;width:230px;box-shadow:0 0 20px rgba(0,0,0,.6);transition:.3s;border:1px solid rgba(255,255,255,.05)}
+.card:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 0 25px var(--accent)}
+
+input,textarea{width:85%;padding:12px;margin:10px;border-radius:8px;border:none;background:#0f1620;color:white}
+
+footer{background:#070b10;padding:20px;text-align:center;border-top:1px solid rgba(255,255,255,.05)}
+
+/* LOGIN */
+#loginBox{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(145deg,#0b0f14,#06090d);padding:25px;border-radius:15px;box-shadow:0 0 30px rgba(0,0,0,.8);text-align:center}
+
+/* glow lines */
+.glow{position:absolute;width:200px;height:200px;background:radial-gradient(circle,var(--accent),transparent);filter:blur(80px);opacity:.2;animation:move 8s infinite alternate}
+@keyframes move{from{transform:translate(-50px,-50px)}to{transform:translate(50px,50px)}}
+
+@media(max-width:768px){
+.hero h2{font-size:30px}
+nav{display:flex;flex-wrap:wrap;justify-content:center}
+}
+</style></head><body><div class="glow"></div><header>
+<h1>ND Gameing</h1>
+<nav>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#services">Services</a>
+<a href="#games">Games</a>
+<a href="#deposit">Deposit</a>
+<a href="#withdraw">Withdraw</a>
+<a href="#contact">Contact</a>
+<a href="#" onclick="openLogin()">Login</a>
+</nav>
+</header><section id="home" class="hero">
+<h2>ND Gameing</h2>
+<p>Ultimate Dark Gaming Experience</p>
+<button class="btn" onclick="openLogin()">Start Playing</button>
+</section><section id="about">
+<h2>About</h2>
+<p>High quality cinematic gaming platform with premium UI experience.</p>
+</section><section id="services">
+<h2>Services</h2>
+<div class="grid">
+<div class="card">⚡ Fast Gaming</div>
+<div class="card">🔐 Secure Payments</div>
+<div class="card">🎧 24/7 Support</div>
+</div>
+</section><section id="games">
+<h2>Games</h2>
+<div class="grid">
+<div class="card">🎲 Ludo</div>
+<div class="card">🃏 Cards</div>
+<div class="card">🎰 Casino</div>
+</div>
+</section><section id="deposit">
+<h2>Deposit</h2>
+<p>Instant UPI / Wallet Deposit</p>
+<button class="btn">Deposit</button>
+</section><section id="withdraw">
+<h2>Withdraw</h2>
+<p>Fast Withdrawal System</p>
+<button class="btn">Withdraw</button>
+</section><section id="contact">
+<h2>Contact</h2>
+<input placeholder="Name"><br>
+<input placeholder="Email"><br>
+<textarea placeholder="Message"></textarea><br>
+<button class="btn">Send</button>
+</section><footer>
+<p>© 2026 ND Gameing</p>
+</footer><div id="loginBox">
+<h2>Login</h2>
+<input id="username" placeholder="Username"><br>
+<input id="password" type="password" placeholder="Password"><br>
+<button class="btn" onclick="login()">Login</button>
+<button class="btn" onclick="closeLogin()">Close</button>
+</div><script>
+function openLogin(){document.getElementById('loginBox').style.display='block'}
+function closeLogin(){document.getElementById('loginBox').style.display='none'}
+function login(){
+let u=document.getElementById('username').value
+let p=document.getElementById('password').value
+if(u==='admin'&&p==='1234'){alert('Login Success');closeLogin()}else{alert('Wrong Details')}}
+</script></body>
+</html>
