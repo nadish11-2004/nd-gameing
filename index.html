@@ -1,154 +1,154 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ND Gameing</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
-body{margin:0;font-family:'Orbitron',sans-serif;background:#05070a;color:#fff}
-header{display:flex;justify-content:space-between;padding:15px;background:#0d0d0d}
-h1{color:#00ffc3}
-nav a{color:white;margin:0 8px;text-decoration:none}
-section{padding:50px;text-align:center}
-.btn{background:#00ffc3;border:none;padding:10px 20px;border-radius:20px;cursor:pointer}
-.card{background:#111;padding:20px;margin:10px;border-radius:10px;width:200px;display:inline-block}
-#loginBox{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#111;padding:20px;border-radius:10px}
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg, #000000, #0f2027, #2c5364);
+  color: white;
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: rgba(0,0,0,0.8);
+}
+
+/* LOGO FIX */
+.logo {
+  height: 60px;   /* yahan size control hota hai */
+}
+
+/* HERO SECTION */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.hero img {
+  width: 140px;   /* BIG LOGO CENTER */
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: 32px;
+}
+
+.btn {
+  padding: 12px 25px;
+  background: #00ffc3;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* LOGIN BOX */
+.login-box {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* MAIN APP */
+#app {
+  display: none;
+  padding: 20px;
+}
+
+/* GAME CARDS */
+.card {
+  background: #111;
+  margin: 15px;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+}
 </style>
+
 </head>
-<body><header>
-<h1><img src="logo.png" alt="ND Gameing Logo" style="height:60px"></h1>
+
+<body>
+
+<!-- NAVBAR -->
 <nav>
-<a href="#">Home</a>
-<a href="#games">Games</a>
-<a href="#wallet">Wallet</a>
-<a href="#" onclick="openLogin()">Login</a>
+  <img src="logo.png" class="logo">
+  <div>ND Gameing</div>
 </nav>
-</header><section>
-<h2>🔥 Welcome to ND Gameing</h2>
-<p>Play • Earn • Enjoy</p>
-<button class="btn" onclick="openLogin()">Start Playing</button>
-</section><section id="dashboard" style="display:none">
-<h2>👤 Dashboard</h2>
-<p>Balance: ₹ <span id="balance">0</span></p>
-</section><section id="games">
-<h2>🎮 Games</h2>
-<div class="card"><button class="btn" onclick="playGame('Ludo')">Ludo</button></div>
-<div class="card"><button class="btn" onclick="playGame('Cards')">Cards</button></div>
-<div class="card"><button class="btn" onclick="playGame('Cricket')">Cricket</button></div>
-<div class="card"><button class="btn" onclick="playGame('Spin')">Spin Wheel</button></div>
-</section><section id="wallet">
-<h2>💰 Wallet</h2>
-<input id="amount" placeholder="Enter amount">
-<br><br>
-<button class="btn" onclick="deposit()">Deposit</button>
-<button class="btn" onclick="withdraw()">Withdraw</button>
-</section><div id="loginBox">
-<h2>Login</h2>
-<input id="user" placeholder="Username"><br><br>
-<input id="pass" type="password" placeholder="Password"><br><br>
-<button class="btn" onclick="login()">Login</button>
-</div><script>
-let balance = localStorage.getItem('balance') || 0;
-document.getElementById('balance').innerText = balance;
 
-function openLogin(){document.getElementById('loginBox').style.display='block'}
+<!-- LANDING -->
+<div id="landing" class="hero">
+  <img src="logo.png">
+  <h1>🔥 Welcome to ND Gameing</h1>
+  <p>Play • Earn • Enjoy</p>
 
-function login(){
-let u=document.getElementById('user').value;
-let p=document.getElementById('pass').value;
-if(u && p){
-alert('Login Success');
-document.getElementById('loginBox').style.display='none';
-document.getElementById('dashboard').style.display='block';
-}else{alert('Enter details')}}
+  <button class="btn" onclick="showLogin()">Start Playing</button>
 
-function deposit(){
-let amt = parseInt(document.getElementById('amount').value);
-if(amt>0){balance=parseInt(balance)+amt;localStorage.setItem('balance',balance);document.getElementById('balance').innerText=balance;alert('Deposited')} }
+  <div class="login-box" id="loginBox">
+    <input id="user" placeholder="Username"><br><br>
+    <input id="pass" type="password" placeholder="Password"><br><br>
+    <button class="btn" onclick="login()">Login</button>
+  </div>
+</div>
 
-function withdraw(){
-let amt = parseInt(document.getElementById('amount').value);
-if(amt>0 && balance>=amt){balance-=amt;localStorage.setItem('balance',balance);document.getElementById('balance').innerText=balance;alert('Withdrawn')} }
+<!-- MAIN APP -->
+<div id="app">
+  <h2>💰 Wallet: ₹<span id="balance">100</span></h2>
 
-function playGame(game){
-let win = Math.random() > 0.5;
-if(win){balance+=10;alert(game+' Win! +10₹')}else{balance-=5;alert(game+' Lose -5₹')}
-localStorage.setItem('balance',balance);
-document.getElementById('balance').innerText=balance;
+  <input id="amount" placeholder="Enter amount">
+  <button onclick="deposit()">Deposit</button>
+  <button onclick="withdraw()">Withdraw</button>
+
+  <h2>🎮 Games</h2>
+
+  <div class="card">🎯 Spin Wheel</div>
+  <div class="card">🏏 Cricket Game</div>
+  <div class="card">🚀 Rocket Crash</div>
+  <div class="card">🎲 Ludo</div>
+  <div class="card">🃏 Cards</div>
+</div>
+
+<script>
+let balance = 100;
+
+function showLogin() {
+  document.getElementById("loginBox").style.display = "block";
 }
 
+function login() {
+  let u = document.getElementById("user").value;
+  let p = document.getElementById("pass").value;
 
-// 🎡 Spin Wheel Game
-function spinWheel(){
-let bet=10;
-if(balance>=bet){
-balance-=bet;
-let rewards=[0,5,10,20,50];
-let result=rewards[Math.floor(Math.random()*rewards.length)];
-balance+=result;
-alert("🎡 You won ₹"+result);
-localStorage.setItem('balance',balance);
-document.getElementById('balance').innerText=balance;
-}else{alert("Low balance")}
+  if(u && p){
+    document.getElementById("landing").style.display = "none";
+    document.getElementById("app").style.display = "block";
+  } else {
+    alert("Enter details");
+  }
 }
 
-// 🏏 Cricket Game
-function cricketGame(){
-let score=Math.floor(Math.random()*100);
-if(score>50){balance+=20;alert("🏏 You scored "+score+" runs! +₹20")}
-else{balance-=10;alert("🏏 You scored "+score+" runs! -₹10")}
-localStorage.setItem('balance',balance);
-document.getElementById('balance').innerText=balance;
+function deposit() {
+  let amt = Number(document.getElementById("amount").value);
+  balance += amt;
+  document.getElementById("balance").innerText = balance;
 }
 
-// 🚀 Rocket Game
-function rocketGame(){
-let bet=10;
-if(balance>=bet){
-balance-=bet;
-let multi=(Math.random()*5).toFixed(2);
-let win=Math.random()>0.5;
-if(win){let profit=bet*multi;balance+=profit;alert("🚀 x"+multi+" Win ₹"+profit)}
-else{alert("💥 Crash! Lost ₹10")}
-localStorage.setItem('balance',balance);
-document.getElementById('balance').innerText=balance;
-}else{alert("Low balance")}
+function withdraw() {
+  let amt = Number(document.getElementById("amount").value);
+  if(balance >= amt){
+    balance -= amt;
+    document.getElementById("balance").innerText = balance;
+  } else {
+    alert("Low balance");
+  }
 }
+</script>
 
-</script><section>
-<h2>🔥 Advanced Games</h2>
-<div class="card"><button class="btn" onclick="spinWheel()">🎡 Spin Wheel</button></div>
-<div class="card"><button class="btn" onclick="cricketGame()">🏏 Cricket Game</button></div>
-<div class="card"><button class="btn" onclick="rocketGame()">🚀 Rocket Crash</button></div>
-</section><!-- 🎁 Daily Bonus --><section>
-<h2>🎁 Daily Bonus</h2>
-<button class="btn" onclick="dailyBonus()">Claim Bonus</button>
-</section><!-- 📊 Leaderboard --><section>
-<h2>🏆 Leaderboard</h2>
-<p>Top Player: You 😎</p>
-<p>Highest Balance: ₹<span id="topBalance">0</span></p>
-</section><script>
-// 🎁 Daily Bonus
-function dailyBonus(){
-let bonus = 20;
-balance += bonus;
-alert("🎁 Daily Bonus ₹20 added!");
-localStorage.setItem('balance',balance);
-document.getElementById('balance').innerText=balance;
-updateTop();
-}
-
-// 📊 Leaderboard Update
-function updateTop(){
-let top = localStorage.getItem('topBalance') || 0;
-if(balance > top){
-localStorage.setItem('topBalance',balance);
-document.getElementById('topBalance').innerText=balance;
-}else{
-document.getElementById('topBalance').innerText=top;
-}
-}
-
-updateTop();
-</script></body>
+</body>
 </html>
